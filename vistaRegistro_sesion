@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    <link href="https://fonts.google.com/share?selection.family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900|Quicksand:wght@300..700">
+    <style>
+     *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family:sans-serif;
+}
+
+body{
+    background-image: url(../proyecto/academia1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main{
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.contededor{
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+
+}
+.caja__trasera{
+    width: 70%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content:center ;
+    backdrop-filter: blur(10px);
+    background-color: rgba(176, 146, 123, 0.498);
+}
+.caja__trasera div{
+    margin: 100px 40px;
+    color: white;
+    transition: all 500ms ;
+}
+
+.caja__trasera div p,
+.caja__trasera div button{
+    margin-top: 30px;
+}
+
+.caja__trasera div h3{
+    font-weight: 400;
+    font-size: 26px;
+}
+
+.caja__trasera button{
+    padding: 10px 40px;
+    border: 2px solid #fff;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    transition: all 300ms;
+
+}
+
+.caja__trasera button:hover{
+    background: #fff;
+    color: rgb(134, 92, 40);
+}
+/*formularios*/
+
+.contenedor__login-registro{
+    display: flex;
+    align-items:center;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    top: -185px;
+    left: 10px;
+}
+
+.contenedor__login-registro form{
+    width: 100%;
+    padding: 80px 40px;
+    background: #fff;
+    position: absolute;
+    border-radius: 20px;
+
+}
+
+.contenedor__login-registro form h2{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.contenedor__login-registro form input{
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: #b5aaaa;
+    font-size: 16px;
+    outline: none;
+}
+
+.contenedor__login-registro form button{
+    padding: 10px 40px;
+    margin-top: 40px;
+    border: none;
+    font-size: 14px;
+    background: #b5aaaa;
+    color: rgb(16, 11, 5);
+    cursor: pointer;
+    outline: none;
+}
+
+.formulario__login label {
+    flex: 1;
+    margin-top: 20;
+    padding: 10px;
+    background: #b5aaaa;
+    border: 1px solid #b79280a7;
+    border-radius: 5px;
+}
+
+.formulario__login select {
+    flex: 2;
+    margin-top: 20;
+    padding: 10px;
+    border: 1px solid #b79280a7;
+    border-radius: 5px;
+}
+
+.formulario__login{
+    opacity: 1;
+    display: block;
+}
+
+.formulario__registro{
+    display: none;
+}
+/*dise;o responsivo*/
+
+@media screen and (max-widt: 850px) {
+    main{
+        margin-top: 50px;
+    }
+    
+    .caja__trasera{
+        max-width: 350px;
+        height: 300px;
+        flex-direction: column;
+        margin: auto;
+    }
+    .caja__trasera div{
+        margin: 0px;
+        position: absolute;
+    }
+
+    /*formularios*/
+    .contenedor__login-registro{
+        top: -20px;
+        left: -5px;
+        margin: auto;
+    }
+    .contenedor__login-registro form{
+        position: relative;
+    }
+}   
+    </style>
+
+</head>
+<body>
+    <main>
+        <div class="contenedor" >
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3> ya tienes cuenta?</h3>
+                    <p>Inicia sesion para entrar en la pagina</p>
+                    <button id="boton__iniciar-sesion">Iniciar sesion</button>
+                </div>
+                <div class="caja__trasera-registro">
+                    <h3> Aun no tienes cuenta</h3>
+                    <p>Registrate para que puedas iniciar sesion</p>
+                    <button id="boton__registrarse">Registrarse</button>
+                </div>
+            </div>
+
+            <div class="contenedor__login-registro">
+
+                <form action="" class="formulario__login">
+                    <h2>Iniciar Sesion </h2>
+                    <input type="text" placeholder="Correo Electronico">
+                    <input type="password" placeholder="Contraseña">
+                    <label for="tipo_usuario">Tipo de usuario:</label>
+                    <select id="tipo_usuario" name="tipo_usuario">
+                        <option value="alumno">Alumno</option>
+                        <option value="tutor">Tutor</option>
+                        <option value="admin">Administrador</option>
+                     </select>
+                    <button>Entrar</button>
+                </form>
+
+                <form action="" class="formulario__registro">
+                    <h2>Registrarse</h2>
+                    <input type="text" placeholder="Primer Nombre">
+                    <input type="text" placeholder="Segundo Nombre">
+                    <input type="text" placeholder="Primer Apellido">
+                    <input type="text" placeholder="Segundo Apellido">
+                    <input type="text" placeholder="Correo electronico">
+                    <input type="password" placeholder="Contraseña">
+                    <button>Registrarse</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+    <script>
+        document.getElementById("boton__registrarse").addEventListener("click", registro);
+document.getElementById("boton__iniciar-sesion").addEventListener("click", iniciar);
+
+
+//vamos a declarar las variables necesarias
+var contenedor_login_registro=document.querySelector(".contenedor__login-registro");
+var form_login=document.querySelector(".formulario__login");
+var form_registro=document.querySelector(".formulario__registro");
+var caja_trasera_login=document.querySelector(".caja__trasera-login");
+var caja_trasera_registro=document.querySelector(".caja__trasera-registro");
+
+
+function registro(){
+    form_registro.style.display = "block";
+    contenedor_login_registro.style.left = "410px";
+    form_login.style.display = "none";
+    caja_trasera_registro.style.opacity = "0";
+    caja_trasera_login.style.opacity = "1";
+}
+function iniciar(){
+    form_login.style.display = "block";
+    contenedor_login_registro.style.left = "10px";
+    form_registro.style.display = "none";
+    caja_trasera_login.style.opacity = "0";
+    caja_trasera_registro.style.opacity = "1"; 
+}
+    </script>
+    
+</body>
+</html>
