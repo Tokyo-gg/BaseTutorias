@@ -188,12 +188,12 @@ main{
         <div class="contenedor" >
             <div class="caja__trasera">
                 <div class="caja__trasera-login">
-                    <h3> ya tienes cuenta?</h3>
+                    <h3> ¿Ya tienes cuenta?</h3>
                     <p>Inicia sesion para entrar en la pagina</p>
                     <button id="boton__iniciar-sesion">Iniciar sesion</button>
                 </div>
                 <div class="caja__trasera-registro">
-                    <h3> Aun no tienes cuenta</h3>
+                    <h3> ¿Aún no tienes cuenta?</h3>
                     <p>Registrate para que puedas iniciar sesion</p>
                     <button id="boton__registrarse">Registrarse</button>
                 </div>
