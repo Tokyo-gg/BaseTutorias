@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis tutorías</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f4d1bc;
+        }
+
+        .calendar-controls {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .calendar-controls button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #f4d1bc;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .calendar-controls button:hover {
+            background-color: #e8b29a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div style="display: flex; height: 100vh;">
+
+        <!-- Menú lateral izquierdo -->
+        <aside style="width: 20%; background-color: #f4d1bc; padding: 20px;">
+            <h2>Menú</h2>
+            <ul style="list-style-type: none; padding: 0;">
+                <li><a href="#">Inicio</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main style="flex-grow: 1; padding: 20px;">
+            <h1>Mis tutorías</h1>
+            
+            <!-- Tutorías agendadas -->
+            <section style="display: flex; gap: 20px; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <img src="https://cdn.pixabay.com/photo/2020/03/17/17/36/database-4941301_1280.png" alt="Base de datos" style="display: block; margin: 1 auto; border-radius: 8px;" width="200" height="150">
+                    <a href="#">Base de datos</a>
+                </div>
+                <div style="text-align: center;">
+                    <img src="https://cdn.pixabay.com/photo/2016/07/29/10/45/graphic-1552416_1280.png" alt="Programación" style="display: block; margin: 1 auto; border-radius: 8px;" width="200" height="150">
+                    <a href="#">Programación</a>
+                </div>
+            </section>
+
+            <!-- Menú desplegable de clases anteriores -->
+            <section>
+                <h3>Anteriores</h3>
+                <select>
+                    <option>Geometría</option>
+                    <option>Cálculo I</option>
+                    <option>Inglés I</option>
+                </select>
+            </section>
+        </main>
+
+        <!-- Calendario -->
+        <aside style="width: 30%; background-color: #f4d1bc; padding: 20px;">
+            <h2>Pendientes</h2>
+            <div class="calendar-controls">
+                <button id="prev-month">Mes anterior</button>
+                <button id="next-month">Mes siguiente</button>
+            </div>
+            <div id="calendar"></div>
+        </aside>
+
+    </div>
+
+    <script>
+        // Variables globales para manejar el mes y año actuales
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        // Función para generar el calendario
+        function generateCalendar(month, year) {
+            const calendarElement = document.getElementById('calendar');
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            let calendarHTML = `<table>
+                <thead>
+                    <tr>
+                        <th colspan="7">${new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(new Date(year, month))}</th>
+                    </tr>
+                    <tr>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>`;
+
+            // Agregar días en blanco al inicio
+            for (let i = 1; i < firstDay; i++) {
+                calendarHTML += '<td></td>';
+            }
+
+            // Agregar días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                calendarHTML += `<td><div>${day}</div></td>`;
+
+                // Crear nueva fila cada domingo
+                if (new Date(year, month, day).getDay() === 0) {
+                    calendarHTML += '</tr><tr>';
+                }
+            }
+
+            // Cerrar filas vacías al final
+            calendarHTML += '</tr></tbody></table>';
+            calendarElement.innerHTML = calendarHTML;
+        }
+
+        // Evento para avanzar al siguiente mes
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        // Evento para retroceder al mes anterior
+        document.getElementById('prev-month').addEventListener('click', () => {
+            if (currentMonth > new Date().getMonth() || currentYear > new Date().getFullYear()) {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+            }
+        });
+
+        // Generar el calendario inicial
+        generateCalendar(currentMonth, currentYear);
+    </script>
+</body>
+</html>
