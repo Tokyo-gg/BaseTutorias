@@ -27,12 +27,13 @@ CREATE TABLE Permiso (
 	Administrar_Facturacion NVARCHAR(100),
 	Subir_reporte NVARCHAR(100),
 	Agendar_tutoria NVARCHAR(100),
+    Descripcion NVARCHAR(255)
 );
 
 CREATE TABLE RolPermiso (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    Id_rol INT,                 -- FK a Rol.Id
-    Id_permiso INT,             -- FK a Permiso.Id
+    Id_Rol INT,
+    Id_Permiso INT,
     CONSTRAINT FK_RolPermiso_Rol FOREIGN KEY (Id_rol) REFERENCES Rol(Id),
     CONSTRAINT FK_RolPermiso_Permiso FOREIGN KEY (Id_permiso) REFERENCES Permiso(Id)
 );
@@ -80,6 +81,7 @@ CREATE TABLE Materias (
 
 CREATE TABLE Sesion (
     Id INT PRIMARY KEY IDENTITY(1,1),
+    Tarifa DECIMAL(10,2),
     Id_tutor INT,                                 -- FK a Tutor.Id
     Id_materia INT,                               -- FK a Materias.Id
     Id_estudiante INT,                            -- FK a Usuario.Id
@@ -95,11 +97,13 @@ CREATE TABLE Sesion (
 
 CREATE TABLE Evaluacion (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    Id_sesion INT,                                -- FK a Sesion.Id
+    Id_sesion INT,
+    Id_PagoTutor INT,                                -- FK a Sesion.Id
     Evaluacion_estudiante NVARCHAR(255),
     Reporte_tutor NVARCHAR(255),
     Puntaje INT,
-    CONSTRAINT FK_Evaluacion_Sesion FOREIGN KEY (Id_sesion) REFERENCES Sesion(Id)
+    CONSTRAINT FK_Evaluacion_Sesion FOREIGN KEY (Id_sesion) REFERENCES Sesion(Id),
+    CONSTRAINT FK_Evaluacion_PagoTutor FOREIGN KEY (Id_PagoTutor) REFERENCES PagoTutor(Id),
 );
 
 CREATE TABLE Factura (
@@ -108,8 +112,10 @@ CREATE TABLE Factura (
     Total DECIMAL(10, 2),
     Tarifa_por_hora DECIMAL(10, 2),
     Tipo_sesion NVARCHAR(50),                     -- Ej. 'Individual' o 'Grupal'
+    Id_PagoTutor INT,                             -- FK a PagoTutor.Id
     Fecha DATE,
     CONSTRAINT FK_Factura_Sesion FOREIGN KEY (Id_sesion) REFERENCES Sesion(Id)
+    CONSTRAINT FK_Factura_PagoTutor FOREIGN KEY (Id_PagoTutor) REFERENCES PagoTutor(Id);
 );
 
 CREATE TABLE TutorMateria (
