@@ -1,5 +1,5 @@
 CREATE TABLE Usuario (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     N1 NVARCHAR(50),            -- Primer nombre
     N2 NVARCHAR(50),            -- Segundo nombre
     A1 NVARCHAR(50),            -- Primer apellido
@@ -9,12 +9,12 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Rol (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Nombre NVARCHAR(50)             -- Nombre del rol (Ejemplo: 'Estudiante', 'Tutor', 'Administrador')
 );
 
 CREATE TABLE UsuarioRol (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_usuario INT,             -- FK a Usuario.Id
     Id_rol INT,                 -- FK a Rol.Id
     CONSTRAINT FK_UsuarioRol_Usuario FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id),
@@ -22,7 +22,7 @@ CREATE TABLE UsuarioRol (
 );
 
 CREATE TABLE Permiso (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Reporte_de_tutor NVARCHAR(100),
 	Administrar_Facturacion NVARCHAR(100),
 	Subir_reporte NVARCHAR(100),
@@ -31,7 +31,7 @@ CREATE TABLE Permiso (
 );
 
 CREATE TABLE RolPermiso (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_Rol INT,
     Id_Permiso INT,
     CONSTRAINT FK_RolPermiso_Rol FOREIGN KEY (Id_rol) REFERENCES Rol(Id),
@@ -39,14 +39,14 @@ CREATE TABLE RolPermiso (
 );
 
 CREATE TABLE Personal (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Nombre NVARCHAR(100),
     Cargo NVARCHAR(50),
     Email NVARCHAR(100) UNIQUE
 );
 
 CREATE TABLE Asistencia (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_personal INT,                              -- FK a Personal.Id
     Fecha DATE,
     Asistencia NVARCHAR(20),                      -- Ej. 'Presente' o 'Ausente'
@@ -60,18 +60,18 @@ CREATE TABLE Tutor (
 );
 
 CREATE TABLE nivel_dificultad (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Categoria INT,                                -- Ejemplo: 1, 2, 3
     Temas NVARCHAR(255)
 );
 
 CREATE TABLE Area (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Nombre NVARCHAR(100)
 );
 
 CREATE TABLE Materias (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Nombre NVARCHAR(100),
     Id_area INT,                                  -- FK a Area.Id
     Id_dificultad INT,                            -- FK a nivel_dificultad.Id
@@ -80,7 +80,7 @@ CREATE TABLE Materias (
 );
 
 CREATE TABLE Sesion (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Tarifa DECIMAL(10,2),
     Id_tutor INT,                                 -- FK a Tutor.Id
     Id_materia INT,                               -- FK a Materias.Id
@@ -96,7 +96,7 @@ CREATE TABLE Sesion (
 );
 
 CREATE TABLE Evaluacion (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_sesion INT,
     Id_PagoTutor INT,                                -- FK a Sesion.Id
     Evaluacion_estudiante NVARCHAR(255),
@@ -107,7 +107,7 @@ CREATE TABLE Evaluacion (
 );
 
 CREATE TABLE Factura (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_sesion INT,                                -- FK a Sesion.Id
     Total DECIMAL(10, 2),
     Tarifa_por_hora DECIMAL(10, 2),
@@ -119,7 +119,7 @@ CREATE TABLE Factura (
 );
 
 CREATE TABLE TutorMateria (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_tutor INT,                                 -- FK a Tutor.Id
     Id_materia INT,                               -- FK a Materias.Id
     CONSTRAINT FK_TutorMateria_Tutor FOREIGN KEY (Id_tutor) REFERENCES Tutor(Id),
@@ -127,7 +127,7 @@ CREATE TABLE TutorMateria (
 );
 -- Tabla HORARIOTUTOR
 CREATE TABLE HorarioTutor (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_Tutor INT,
     Dia_semana NVARCHAR(20),
     Hora_Inicio TIME,
@@ -137,7 +137,7 @@ CREATE TABLE HorarioTutor (
 
 -- Tabla PAGOTUTOR
 CREATE TABLE PagoTutor (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_Sesion INT,
     Id_Tutor INT,
     Comision_Administrador DECIMAL(10,2),
@@ -156,7 +156,7 @@ CREATE TABLE Estudiante (
 
 -- Tabla CONTABILIDAD
 CREATE TABLE Contabilidad (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_PagoTutor INT,
     Id_Factura INT,
     Ingreso_Bruto DECIMAL(10,2),
@@ -169,7 +169,7 @@ CREATE TABLE Contabilidad (
 
 -- Tabla CONTRATACION
 CREATE TABLE Contratacion (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    Id INT PRIMARY KEY ,
     Id_Tutor INT,
     Id_Administrador INT,
     Fecha_de_contratacion DATE,
